@@ -1,0 +1,26 @@
+# Downloaded apps (not source)
+ffmpeg/
+whisper/
+yt-dlp/
+
+# Cloned upstream source repos (already public)
+repos/
+
+# Node dependencies and build output
+node_modules/
+*/node_modules/
+out/
+renders/
+.hyperframes/
+
+# Media: keep the repo light and free of copyrighted audio
+audio/
+*.mp3
+*.wav
+*.m4a
+*.mp4
+*.webm
+*.mkv
+*.mov
+*.ass
+*.srt

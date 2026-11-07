@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #05070d;
+        --ink: #f5f8ff;
+        --accent: #8fb8ff;
+        --font-display: "Segoe UI", Arial, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 20% 10%, rgba(36, 78, 140, 0.35), transparent 42%),
+          radial-gradient(circle at 85% 90%, rgba(94, 42, 128, 0.3), transparent 45%),
+          var(--ground);
+        font-family: var(--font-display);
+      }
+      #glow {
+        position: absolute;
+        left: 760px;
+        top: 220px;
+        width: 900px;
+        height: 900px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(80, 160, 255, 0.32), transparent 65%);
+        filter: blur(18px);
+      }
+      #tag {
+        position: absolute;
+        top: 72px;
+        left: 96px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+      }
+      #content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #title {
+        color: var(--ink);
+        font-size: 124px;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        line-height: 0.95;
+        text-align: center;
+      }
+      #rule {
+        width: 220px;
+        height: 3px;
+        margin: 40px 0 34px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        transform-origin: center;
+      }
+      #sub {
+        color: var(--accent);
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="6"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="glow" class="clip" data-start="0" data-duration="6" data-track-index="0"></div>
+      <div id="tag" class="clip" data-start="0" data-duration="6" data-track-index="1">HyperFrames</div>
+      <div id="content">
+        <h1 id="title" class="clip" data-start="0" data-duration="6" data-track-index="2">HTML to MP4</h1>
+        <div id="rule" class="clip" data-start="0" data-duration="6" data-track-index="3"></div>
+        <p id="sub" class="clip" data-start="0" data-duration="6" data-track-index="4">Render OK &middot; 1920 &times; 1080</p>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(
+        "#title",
+        { opacity: 0, y: 90, filter: "blur(18px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power4.out" },
+        0.15
+      );
+      tl.fromTo(
+        "#sub",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        0.7
+      );
+      tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 0.85);
+      tl.fromTo(
+        "#glow",
+        { x: -120, y: 90, scale: 0.8 },
+        { x: 120, y: -70, scale: 1.25, duration: 5, ease: "sine.inOut" },
+        0
+      );
+      tl.to("#title", { scale: 1.04, duration: 2.5, ease: "sine.inOut" }, 2.2);
+      tl.to("#root", { opacity: 0, duration: 0.6, ease: "power2.in" }, 5.35);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
